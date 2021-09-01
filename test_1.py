@@ -12,9 +12,10 @@ biases =tf.Variable(tf.zeros([1])) #zeros 生成一个空的（所有值都是0�
 
 y = Weights*x_data + biases
 
-loss =tf.reduce_mean(tf.square(y-y_data)) #取平均值
+loss =tf.reduce_mean(tf.square(y-y_data)) #取平均值  reduce_mean是必须的，但是square可以换成abs，不过会慢一点，最主要的目的应该还是取正值
 
-optimizer =tf.train.GradientDescentOptimizer(0.5)
+optimizer =tf.train.GradientDescentOptimizer(0.5)#这个地方数字是数字越小，最后答案离近似值越近，但是会非常慢，也就是训练次数会翻好几倍，
+#0.1和1的差距大概是在10倍左右
 train = optimizer.minimize(loss)
 #可以二合一为这个：train=tf.train.GradientDescentOptimizer(0.5).minimize(loss)
 
